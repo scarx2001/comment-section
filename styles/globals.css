@@ -1,16 +1,572 @@
-html,
+:root {
+  --font-fam: "Rubik", Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  --border-radius: 0.5rem;
+  --moderate-blue: hsl(238, 40%, 52%);
+  --soft-red: hsl(358, 79%, 66%);
+  --light-grayish-blue: hsl(239, 57%, 85%);
+  --pale-red: hsl(357, 100%, 86%);
+
+  --dark-blue: hsl(212, 24%, 26%);
+  --grayish-blue: hsl(211, 10%, 45%);
+  --light-gray: hsl(223, 19%, 93%);
+  --very-light-gray: hsl(228, 33%, 97%);
+  --white: hsl(0, 0%, 100%);
+}
+
 body {
+  background-color: var(--very-light-gray);
+  font-family: var(--font-fam);
+}
+
+textarea {
+  width: 100%;
+  padding: 1rem 0 2.5rem 1rem;
+  resize: none;
+  border: var(--very-light-gray) solid 2px;
+  border-radius: var(--border-radius);
+  font-family: var(--font-fam);
+  color: var(--dark-blue);
+}
+
+textarea:focus {
+  outline: var(--moderate-blue) solid 1px;
+}
+
+button {
+  width: 7rem;
+  background-color: var(--moderate-blue);
+  color: white;
+  font-family: var(--font-fam);
+  font-weight: 500;
+  font-size: medium;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.85rem 1.5rem;
+  margin-left: 1rem;
+}
+
+div:not(.voteIcon) > img {
+  width: 2.5rem;
+}
+
+button:active {
+  background-color: var(--light-grayish-blue) !important;
+}
+
+.mouse-pointer {
+  cursor: pointer;
+}
+
+.user-select-none {
+  user-select: none;
+}
+
+.App {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.comments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.commentAndReplies {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.box {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+}
+
+.commentContainer {
+  display: flex;
+  gap: 1.25rem;
+  flex-direction: column;
+}
+
+.commentVotes {
+  border-radius: var(--border-radius);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-evenly;
+  background-color: var(--very-light-gray);
+}
+
+.voteIcon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  color: var(--moderate-blue);
+}
+
+.voteIcon:not(.score) {
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+.voteIcon:not(.score):active {
+  filter: saturate(2000%) brightness(75%);
+}
+
+.score {
+  user-select: none;
   padding: 0;
+}
+
+.commentContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.replyingTo {
+  color: var(--moderate-blue);
+  font-weight: 700;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  color: var(--grayish-blue);
+  gap: 1rem;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.userName {
+  font-weight: 500;
+  color: var(--dark-blue);
+}
+
+.youTag {
+  background-color: var(--moderate-blue);
+  color: white;
+  font-size: smaller;
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.15rem;
+  text-align: center;
+}
+
+.commentButtons {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1.5rem;
+  flex-wrap: nowrap;
+  margin-left: auto;
+}
+
+.deleteButton {
+  color: var(--soft-red);
+}
+
+.deleteButton:active {
+  color: var(--pale-red);
+}
+
+.deleteButton:active .replyImg {
+  filter: brightness(175%);
+}
+
+.replyButton {
+  color: var(--moderate-blue);
+}
+
+.replyButton:active {
+  color: var(--light-grayish-blue);
+}
+
+.replyButton:active .replyImg {
+  filter: brightness(225%);
+}
+
+.deleteButton,
+.replyButton {
+  font-weight: 500;
+}
+
+.replyImg {
+  padding-right: 0.5rem;
+}
+
+.commentText {
+  width: 100%;
+  line-height: 1.5rem;
+  color: var(--grayish-blue);
+}
+
+.commentReplies {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  gap: 1.5rem;
+  justify-content: flex-end;
+  border-left: solid 2px var(--light-gray);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.commentReplies .commentContainer {
+  max-width: 100%;
 }
 
-* {
-  box-sizing: border-box;
+.newReplyContainer {
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
+.replyToCommentContent {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  padding: 0rem 1rem 0 1rem;
+}
+
+.replyToCommentTextarea {
+  width: 120%;
+}
+
+.newCommentBox {
+  margin-top: 1.5rem;
+}
+
+.newCommentContainer {
+  padding: 1.5rem 1rem;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+}
+
+.newCommentContent {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+}
+
+.newCommentImg img {
+  margin-left: 0.15rem;
+}
+
+.newCommentTextbox {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.newCommentTextbox button {
+  width: 7rem;
+  margin-left: auto;
+}
+
+.deleteModal {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  max-height: 120%;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteModalBox {
+  background-color: white;
+  border-radius: var(--border-radius);
+}
+
+.deleteModalTitle {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  color: var(--dark-blue);
+}
+
+.deleteModalText {
+  line-height: 1.35rem;
+  color: var(--grayish-blue);
+}
+
+.deleteModalButtonsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.deleteModalButton {
+  font-weight: 500;
+  font-size: medium;
+  font-family: var(--font-fam);
+  color: white;
+  padding: 1rem 0.75rem;
+  width: 48%;
+  border-radius: var(--border-radius);
+  border: none;
+}
+
+.cancelDeleteButton {
+  background-color: var(--grayish-blue);
+}
+
+.confirmDeleteButton {
+  background-color: var(--soft-red);
+}
+
+@media screen and (min-width: 375px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .mobile .replyButton,
+  .mobile .deleteButton {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .mobile .replyButton + .deleteButton {
+    margin-right: 5rem;
+  }
+
+  .App {
+    padding: 2rem 1rem;
+  }
+
+  .box {
+    padding: 1rem;
+  }
+
+  .comments {
+    width: 100%;
+  }
+
+  .commentContainer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .commentButtons {
+    margin-left: 0;
+    width: 30%;
+    order: 3;
+  }
+
+  .commentReplies {
+    padding-left: 1rem;
+    margin-left: 0rem;
+  }
+
+  .commentVotes {
+    flex-direction: row;
+    order: 2;
+    padding: 0.75rem 0.375rem;
+    width: 5rem;
+    height: 1rem;
+  }
+
+  .voteIcon {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .voteIcon:not(.score) {
+    padding: 0;
+  }
+
+  .newCommentBox {
+    width: 100%;
+  }
+
+  .newCommentContent {
+    flex-wrap: wrap;
+  }
+
+  .newCommentTextbox {
+    order: 0;
+    width: 100%;
+  }
+
+  .newCommentImg {
+    order: 1;
+  }
+
+  .newCommentButton {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .newReplyContainer {
+    width: 100%;
+    margin-top: 0.75rem;
+  }
+
+  .replyToCommentContent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 0rem;
+  }
+
+  .replyToCommentTextarea {
+    width: 100%;
+    order: 0;
+  }
+
+  .replyToCommentTextarea textarea {
+    padding: 1rem 0 2rem 0;
+  }
+
+  .replyToCommentImg {
+    order: 1;
+  }
+
+  .replyToCommentButton {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .deleteModalBox {
+    height: 12rem;
+    width: 75%;
+    padding: 1.5rem 2rem 0.75rem 2rem;
+    margin-bottom: 7.5%;
+  }
+
+  .deleteModalButton {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .mobile {
+    display: none;
+  }
+
+  .desktop {
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .desktop .replyButton,
+  .desktop .deleteButton {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .App {
+    flex-direction: column;
+    width: 45rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .box {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .comments {
+    width: 100%;
+  }
+
+  .commentContainer {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .commentReplies {
+    padding-left: 2.5rem;
+    margin-left: 2.5rem;
+  }
+
+  .commentVotes {
+    flex-direction: column;
+    order: 0;
+    padding: 0rem 0.75rem 0rem 0.75rem;
+    height: 6.5rem;
+    max-height: 6.5rem;
+    max-width: 1rem;
+  }
+
+  .newCommentBox {
+    width: 100%;
+  }
+
+  .newCommentContainer {
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 1.5rem 0rem;
+    width: 100%;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+  }
+
+  .newCommentContent {
+    flex-wrap: nowrap;
+    gap: 1rem;
+  }
+
+  .newCommentTextbox {
+    order: 1;
+  }
+
+  .newReplyContainer {
+    padding: 2rem 1rem;
+  }
+
+  .newReplyContainer .newCommentContent .newCommentTextbox textarea {
+    padding: 1rem 0 2.5rem 1rem;
+  }
+
+  .newCommentImg {
+    order: 0;
+    margin-left: 1.25rem;
+  }
+
+  .newCommentButton {
+    order: 2;
+    margin-right: 1rem;
+  }
+
+  .replyToCommentContent {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    padding: 0rem 0rem 0 1rem;
+  }
+
+  .replyToCommentTextarea {
+    width: 100%;
+    order: 1;
+  }
+
+  .replyToCommentButton {
+    order: 1;
+    margin-left: auto;
+  }
+
+  .deleteModalBox {
+    height: 15%;
+    width: 16.5%;
+    padding: 2rem;
+    margin-bottom: 7.5%;
+  }
 }
